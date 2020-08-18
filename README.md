@@ -24,7 +24,7 @@ This style guide is used in Viettel Digital. This may be different from others y
   * [Type Inference](#type-inference)
   * [Syntactic Sugar](#syntactic-sugar)
 * [Memory Management](#memory-management)
-  * [Extending Lifetime](#extending-object-lifetime)
+  * [Extending object lifetime](#extending-object-lifetime)
 * [Access Control](#access-control)
 * [Control Flow](#control-flow)
   * [Ternary Operator](#ternary-operator)
