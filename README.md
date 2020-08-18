@@ -588,7 +588,7 @@ Prefer the `for-in` style of `for` loop over the `while-condition-increment` sty
 
 **Preferred**:
 ```swift
-for _ in 0..<3 {
+for _ in 0 ..< 3 {
   print("Hello three times")
 }
 
@@ -600,7 +600,7 @@ for index in stride(from: 0, to: items.count, by: 2) {
   print(index)
 }
 
-for index in (0...3).reversed() {
+for index in (0 ... 3).reversed() {
   print(index)
 }
 ```
