@@ -28,7 +28,7 @@ This style guide is used in Viettel Digital. This may be different from others t
 * [Access Control](#access-control)
 * [Control Flow](#control-flow)
   * [Ternary Operator](#ternary-operator)
-* [Unwrapp optional type](#unwrapp-optional-type)
+* [Unwrap optional type](#unwrap-optional-type)
   * [Failing Guards](#failing-guards)
 * [Semicolons](#semicolons)
 * [Parentheses](#parentheses)
@@ -642,7 +642,7 @@ result = isHorizontal ? x : y
 result = a > b ? x = c > d ? c : d : y
 ```
 
-## Unwrapp optional type
+## Unwrap optional type
 
 When multiple optionals are unwrapped either with `guard` or `if let`, minimize nesting by using the compound version when possible. In the compound version, place the `guard` on its own line, then indent each condition on its own line. The `else` clause is indented to match the conditions and the code is indented one additional level, as shown below. Example:
 
