@@ -30,7 +30,7 @@ Strive to make your code compile without warnings.
 
 ## Using SwiftLint
 
-See the [SwiftLint Policy](https://github.com/raywenderlich/swift-style-guide/blob/master/SWIFTLINT.markdown) for more information.
+See the [SwiftLint](https://github.com/realm/SwiftLint) for more information.
 
 ## Naming
 
