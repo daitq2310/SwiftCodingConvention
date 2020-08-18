@@ -1,4 +1,4 @@
-# Swift Conding Convention For Viettel Digital
+# Swift Conding Convention
 
 This style guide is used in Viettel Digital. This may be different from others you may see.
 
