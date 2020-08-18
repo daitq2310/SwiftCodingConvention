@@ -1,6 +1,6 @@
 # Swift Conding Convention
 
-This style guide is used in Viettel Digital. This may be different from others you may see.
+This style guide is used in Viettel Digital. This may be different from others you have seen.
 
 ## Table of Contents
 
