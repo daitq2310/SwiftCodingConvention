@@ -23,6 +23,16 @@ This style guide is used in Viettel Digital. This may be different from others y
   * [Optionals](#optionals)
   * [Type Inference](#type-inference)
   * [Syntactic Sugar](#syntactic-sugar)
+* [Memory Management](#memory-management)
+  * [Extending Lifetime](#extending-lifetime)
+* [Access Control](#access-control)
+* [Control Flow](#control-flow)
+  * [Ternary Operator](#ternary-operator)
+* [Unwrapp optional type](#unwrapp-optional-type)
+  * [Failing Guards](#failing-guards)
+* [Semicolons](#semicolons)
+* [Parentheses](#parentheses)
+
 
 ## Correctness
 
@@ -503,4 +513,200 @@ var phoneNumber: Int?
 var deviceModels: Array<String>
 var employees: Dictionary<Int, String>
 var phoneNumber: Optional<Int>
+```
+
+## Memory Management
+
+Code (even non-production, tutorial demo code) should not create reference cycles. Analyze your object graph and prevent strong cycles with `weak` and `unowned` references. Alternatively, use value types (`struct`, `enum`) to prevent cycles altogether.
+
+### Extending object lifetime
+
+Extend object lifetime using the `[weak self]` and `guard let self = self else { return }` idiom. `[weak self]` is preferred to `[unowned self]` where it is not immediately obvious that `self` outlives the closure. Explicitly extending lifetime is preferred to optional chaining.
+
+**Preferred**
+```swift
+resource.request().onComplete { [weak self] response in
+  guard let self = self else {
+    return
+  }
+  let model = self.updateModel(response)
+  self.updateUI(model)
+}
+```
+
+**Not Preferred**
+```swift
+// might crash if self is released before response returns
+resource.request().onComplete { [unowned self] response in
+  let model = self.updateModel(response)
+  self.updateUI(model)
+}
+```
+
+**Not Preferred**
+```swift
+// deallocate could happen between updating the model and updating UI
+resource.request().onComplete { [weak self] response in
+  let model = self?.updateModel(response)
+  self?.updateUI(model)
+}
+```
+
+## Access Control
+
+Full access control annotation in tutorials can distract from the main topic and is not required. Using `private` appropriately.
+
+Only explicitly use `open`, `public`, and `internal` when you require a full access control specification.
+
+Should use `private` for `@IBAction`, `@IBOutlet`.
+
+Use access control as the leading property specifier. The only things that should come before access control are the `static` and specifier or attributes such as `@IBAction`, `@IBOutlet` and `@discardableResult`.
+
+**Preferred**:
+```swift
+@IBOutlet private weak var buttonSecurePassword: UIButton!
+@IBOutlet private weak var buttonSecureConfirmPassword: UIButton!
+
+@IBAction private func invokeButtonSecurePassword(_ sender: Any) {...}
+    
+@IBAction private func invokeButtonSecureConfirmPassword(_ sender: Any) {...}
+```
+
+**Not Preferred**:
+```swift
+@IBOutlet weak var buttonSecurePassword: UIButton!
+@IBOutlet weak var buttonSecureConfirmPassword: UIButton!
+
+@IBAction func invokeButtonSecurePassword(_ sender: Any) {...}
+    
+@IBAction func invokeButtonSecureConfirmPassword(_ sender: Any) {...}
+```
+
+## Control Flow
+
+Prefer the `for-in` style of `for` loop over the `while-condition-increment` style.
+
+**Preferred**:
+```swift
+for _ in 0..<3 {
+  print("Hello three times")
+}
+
+for (index, person) in attendeeList.enumerated() {
+  print("\(person) is at position #\(index)")
+}
+
+for index in stride(from: 0, to: items.count, by: 2) {
+  print(index)
+}
+
+for index in (0...3).reversed() {
+  print(index)
+}
+```
+
+**Not Preferred**:
+```swift
+var i = 0
+while i < 3 {
+  print("Hello three times")
+  i += 1
+}
+
+
+var i = 0
+while i < attendeeList.count {
+  let person = attendeeList[i]
+  print("\(person) is at position #\(i)")
+  i += 1
+}
+```
+
+### Ternary Operator
+
+The Ternary operator, `?:` , should only be used when it increases clarity or code neatness. A single condition is usually all that should be evaluated. Evaluating multiple conditions is usually more understandable as an `if` statement or refactored into instance variables. In general, the best use of the ternary operator is during assignment of a variable and deciding which value to use.
+
+**Preferred**:
+
+```swift
+let value = 5
+result = value != 0 ? x : y
+
+let isHorizontal = true
+result = isHorizontal ? x : y
+```
+
+**Not Preferred**:
+
+```swift
+result = a > b ? x = c > d ? c : d : y
+```
+
+## Unwrapp optional type
+
+When multiple optionals are unwrapped either with `guard` or `if let`, minimize nesting by using the compound version when possible. In the compound version, place the `guard` on its own line, then indent each condition on its own line. The `else` clause is indented to match the conditions and the code is indented one additional level, as shown below. Example:
+
+**Preferred**:
+```swift
+guard 
+  let number1 = number1,
+  let number2 = number2,
+  let number3 = number3 
+  else {
+    fatalError("impossible")
+}
+// do something with numbers
+```
+
+**Not Preferred**:
+```swift
+if let number1 = number1 {
+  if let number2 = number2 {
+    if let number3 = number3 {
+      // do something with numbers
+    } else {
+      fatalError("impossible")
+    }
+  } else {
+    fatalError("impossible")
+  }
+} else {
+  fatalError("impossible")
+}
+```
+
+### Failing Guards
+
+Guard statements are required to exit in some way. Generally, this should be simple one line statement such as `return`, `throw`, `break`, `continue`, and `fatalError()`. Large code blocks should be avoided. If cleanup code is required for multiple exit points, consider using a `defer` block to avoid cleanup code duplication.
+
+## Semicolons
+
+Swift does not require a semicolon after each statement in your code. They are only required if you wish to combine multiple statements on a single line.
+
+**Preferred**:
+```swift
+let swift = "This is Example"
+```
+
+**Not Preferred**:
+```swift
+let swift = "This is Example";
+```
+
+## Parentheses
+
+Parentheses around conditionals are not required and should be omitted.
+
+**Preferred**:
+```swift
+if name == "Hello" {
+  print("World")
+}
+```
+
+**Not Preferred**:
+```swift
+if (name == "Hello") {
+  print("World")
+}
 ```
