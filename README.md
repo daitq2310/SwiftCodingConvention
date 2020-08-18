@@ -1,4 +1,4 @@
-# Swift Conding Convention
+# Swift Coding Convention
 
 This style guide is used in Viettel Digital. This may be different from others you have seen.
 
