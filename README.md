@@ -117,7 +117,7 @@ private func mumberOfEggs() -> Int {
 }
 ```
 
-**NOTE**: You have to fix their (`TODO` and `FIXME`) warnings before you release.
+**NOTE**: You have to fix their (`TODO` and `FIXME`) warnings before you release app.
 
 ### Protocol Conformance
 
