@@ -40,7 +40,7 @@ Strive to make your code compile without warnings.
 
 ## Using SwiftLint
 
-See the [SwiftLint](https://github.com/realm/SwiftLint) for more information.
+See the [SwiftLint](https://github.com/realm/SwiftLint#swiftlint) for more information.
 
 ## Naming
 
@@ -93,7 +93,15 @@ let colour = "red"
 
 ## Code Organization
 
-Use extensions to organize your code into logical blocks of functionality. Each extension should be set off with a `// MARK: -` comment to keep things well-organized.
+Use extensions to organize your code into logical blocks of functionality. Each extension should be set off with a `MARK` comment to keep things well-organized.
+
+```swift
+// MARK: - UITableViewDataSource
+extension MyViewController: UITableViewDataSource {...}
+
+// MARK: - UIScrollViewDelegate
+extension MyViewController: UIScrollViewDelegate {...}
+```
 
 ### Protocol Conformance
 
