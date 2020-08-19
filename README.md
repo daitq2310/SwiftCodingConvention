@@ -103,6 +103,22 @@ extension MyViewController: UITableViewDataSource {...}
 extension MyViewController: UIScrollViewDelegate {...}
 ```
 
+When using this syntax (`TODO` and `FIXME`), you can get some extra information to show up in the quick jump bar.
+
+```swift
+// TODO: - Actually implement the logic for this method
+private func isValid() -> Bool {
+  return true
+}
+
+// FIXME: - Returns incorrect values for some arguments
+private func mumberOfEggs() -> Int {
+  return 2
+}
+```
+
+**NOTE**: You have to fix their (`TODO` and `FIXME`) warnings before you release.
+
 ### Protocol Conformance
 
 In particular, when adding protocol conformance to a model, prefer adding a separate extension for the protocol methods. This keeps the related methods grouped together with the protocol and can simplify instructions to add a protocol to a class with its associated methods.
