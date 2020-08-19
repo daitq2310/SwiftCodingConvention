@@ -180,6 +180,8 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 Import only the modules a source file requires. For example, don't import `UIKit` when importing `Foundation` will suffice. Likewise, don't import `Foundation` if you must import `UIKit`.
 
+**NOTE**: If you import `UIKit` you do not need to import `Foundation` because it already imports it in the backstage.
+
 **Preferred**:
 ```swift
 import UIKit
