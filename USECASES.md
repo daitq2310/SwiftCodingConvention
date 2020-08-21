@@ -24,7 +24,7 @@ This use cases is used in Viettel Digital.
 To create new modules, put them to the right group (`core`, `commons`, `features`) and follow the below checklist.
 - Language: `Swift` (do not use `Objective-C` anymore).
 - Bitcode: Change to `NO` if you use Pods.
-- Development Team: `Viettel Corpration`.
+- Development Team: `Viettel Corporation`.
 - Beginning Version: `1.0.0`.
 - Beginning Build: `1`.
 - Target Version: `9.0`.
