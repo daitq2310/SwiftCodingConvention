@@ -32,7 +32,7 @@ To create new modules, put them to the right group (`core`, `commons`, `features
 - Device: `iPhone`.
 - Configuration:
   * `Debug`.
-  * `beta debg`.
+  * `beta debug`.
   * `uat debug`.
   * `alpha debug`.
   * `staging debug`.
